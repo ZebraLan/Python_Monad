@@ -25,7 +25,7 @@ class Monad(Applicative):
     def _bind(self, f):
         assert False, 'Instances of Monad must implement bind.'
 
-class _Pure(object):
+class Pure(object):
     def __init__(self, a):
         self._a = a
 
@@ -68,7 +68,7 @@ class Maybe(Monad):
 
     def _ap(self, fa):
         if self._a != None:
-            if isinstance(fa, _Pure):
+            if isinstance(fa, Pure):
                 fa = self._pure(fa._a)
             assert isinstance(fa, Maybe)
             return fa._fmap(self._a)
